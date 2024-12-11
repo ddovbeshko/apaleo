@@ -1,0 +1,38 @@
+<div>
+  <input type="text"
+         [(ngModel)]="searchQuery"
+         placeholder="Search by first or last name"
+         (input)="searchUsers()"/>
+
+  <table>
+    <thead>
+    <tr>
+      <th (click)="sortUsers('firstName')">First Name</th>
+      <th (click)="sortUsers('lastName')">Last Name</th>
+      <th (click)="sortUsers('age')">Age</th>
+      <th>Address</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of visibleUsers; trackBy: trackByFn">
+      <td>{{ user.firstName }}</td>
+      <td>{{ user.lastName }}</td>
+      <td>{{ user.age }}</td>
+      <td>
+        <span>{{ user.address.address}}, </span>
+        <span>{{ user.address.city}}, </span>
+        <span>{{ user.address.stateCode}}, </span>
+        <span>{{ user.address.country}}, </span>
+        <span>{{ user.address.postalCode}}</span>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div class="pagination">
+    <button *ngFor="let page of numberOfPages let i = index"
+            (click)="changePage(i + 1)">
+      {{ i + 1 }}
+    </button>
+  </div>
+</div>
